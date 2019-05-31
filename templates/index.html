@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Youtube mp3 simple converter</title>
+</head>
+<style>
+    form {
+        text-align: center;
+    }
+</style>
+<body>
+
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form }}
+{#    <label for="login-field">Ваш логин</label>#}
+{#      <input type="text" name="login" id="login-field">#}
+    <input type="submit" value="Submit">
+
+  </form>
+<container id="message_container">
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %} style="text-align: center; color: darkgreen;">{{ message }}</li>
+        {% endfor %}
+</ul>
+    </div>
+{% endif %}
+</container>
+</body>
+<script>
+    var message_ele = document.getElementById("message_container");
+
+setTimeout(function(){
+   message_ele.style.display = "none";
+}, 3000);
+
+</script>
+</html>
