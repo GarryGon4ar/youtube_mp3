@@ -2,7 +2,9 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
+import dotenv
 
+dotenv.read_dotenv('.env')
 
 def main():
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'youtubedll.settings')
