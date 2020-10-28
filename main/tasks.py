@@ -7,20 +7,24 @@ from youtubedll.celery import app
 @app.task
 def download_song(video_url, email, full_url):
     ydl_opts = {
-        'format': 'bestaudio/best',
-        'outtmpl': 'media/%(title)s.%(ext)s',
-        'postprocessors': [{
-            'key': 'FFmpegExtractAudio',
-            'preferredcodec': 'mp3',
-            'preferredquality': '192',
-        }]}
+        "format": "bestaudio/best",
+        "outtmpl": "media/%(title)s.%(ext)s",
+        "postprocessors": [
+            {
+                "key": "FFmpegExtractAudio",
+                "preferredcodec": "mp3",
+                "preferredquality": "192",
+            }
+        ],
+    }
     with youtube_dl.YoutubeDL(ydl_opts) as ydl:
         info = ydl.extract_info(video_url)
-        filename = info['title']
+        filename = info["title"]
         send_mail(
-            'Download link',
-            ('http://' + full_url + '/media/' + filename).replace(" ", "%20") + '.mp3',
+            "Download link",
+            ("http://" + full_url + "/media/" + filename).replace(" ", "%20")
+            + ".mp3",
             settings.EMAIL_HOST_USER,
             [email],
-            fail_silently=False
+            fail_silently=False,
         )

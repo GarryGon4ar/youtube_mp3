@@ -3,8 +3,8 @@ from .models import Song
 
 
 class SongAdmin(admin.ModelAdmin):
-    list_display = ("link", 'created_at')
-    readonly_fields = ("link", 'created_at')
+    list_display = ("link", "created_at")
+    readonly_fields = ("link", "created_at")
 
 
 admin.site.register(Song, SongAdmin)
